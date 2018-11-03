@@ -1,0 +1,47 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: beige;
+}
+
+.board {
+    width: 50%;
+    height: 90%;
+    background-color: brown;
+    margin: auto;
+    display: grid;
+    grid-row-gap: 3px;
+}
+
+.arrows {
+    display: grid;
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+}
+
+.arrow {
+    background-image: url(./downArrow.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.block {
+    width: 100%;
+    height: 100%;
+    border-radius: 80%;
+    background-color: yellow;
+}
+
+.timer {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+}
