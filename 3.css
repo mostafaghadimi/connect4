@@ -22,11 +22,13 @@
 .arrows {
     display: grid;
     width: 50%;
-    height: 50%;
+    height: 30px;
     margin: 0 auto;
 }
 
 .arrow {
+    width: auto;
+    height: auto;
     background-image: url(./downArrow.png);
     background-repeat: no-repeat;
     background-position: center;
