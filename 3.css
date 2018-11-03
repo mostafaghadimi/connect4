@@ -12,7 +12,7 @@
 
 .board {
     width: 50%;
-    height: 90%;
+    height: 80%;
     background-color: brown;
     margin: auto;
     display: grid;
@@ -42,8 +42,9 @@
     background-color: yellow;
 }
 
-.timer {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
+.info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 50%;
+    margin: auto;
 }

@@ -27,10 +27,11 @@ var gameSize = init(),
     rowsHeight = "";
 
 // arrows
-for (let i = 0; i < rows; i++) {
+for (let i = 0; i < cols; i++) {
     let div = document.createElement('div');
     div.className = 'arrow';
     arrowsSpace += "1fr "
+
     arrows.appendChild(div);
 }
 
@@ -45,7 +46,6 @@ for (let i = 0; i < rows; i++) {
 }
 
 // Layout
-
 for (let i = 0; i < rows; i++) {
     rowsHeight += `1fr `;
 }
@@ -61,13 +61,13 @@ boardGame.style.gridTemplateColumns = rowsWidth;
 boardGame.style.gridTemplateRows = rowsHeight;
 
 
-// function timer() {
-//     var timeleft = 10;
-//     var turnTimer = setInterval(function () {
-//         document.getElementById("progressBar").value = 10 - --timeleft;
-//         if (timeleft <= 0)
-//             clearInterval(turnTimer);
-//     }, 1000);
-// }
+function timer() {
+    var timeleft = 10;
+    var turnTimer = setInterval(function () {
+        document.querySelector('.timer').innerHTML = --timeleft;
+        if (timeleft <= 0)
+            clearInterval(turnTimer);
+    }, 1000);
+}
 
-// timer();
+timer();
