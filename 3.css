@@ -28,7 +28,8 @@
 
 .arrow {
     width: auto;
-    height: auto;
+    height: 80%;
+    align-self: center;
     background-image: url(./downArrow.png);
     background-repeat: no-repeat;
     background-position: center;
