@@ -36,6 +36,7 @@ function layoutBuilder(rows, cols, boardGame, arrows, arrowsSpace, rowsWidth, ro
         for (let j = 0; j < cols; j++) {
             let div = document.createElement('div');
             div.className = `block cell-${i}-${j}`;
+            div.style.boxShadow = 'inset 0 0 10px #aaaaaa';
             div.addEventListener("click", selected(j));
             boardGame.appendChild(div);
             map[i][j] = 0;
@@ -231,22 +232,22 @@ function changeColor(i, j){
     var keyframe = `\
         @keyframes animation-${i}-${j} {\
             from {\
-                transform: 'translateY(-50px)'\
+                transform: translateY(0)\
             },\
             to {\
-                transform: 'translateY(50px)'\
+                transform: translateY(500px)\
             }\
         }\
     \
     `
-    style.innerHTML += keyframe;
-    // div.style.width =  div.offsetWidth +'px';
-    // div.style.height = div.offsetHeight+'px';
-    div.style.animationName = `animation-${i}-${j}`;
-    div.style.animationDuration = '2s';
-    // div.style.position = 'absolute';
-    div.style.animationFillMode = 'forwards';
-    div.style.zIndex = 200;
+    // style.innerHTML += keyframe;
+    // newDiv.style.width =  div.offsetWidth +'px';
+    // newDiv.style.height = div.offsetHeight+'px';
+    // newDiv.style.animationName = `animation-${i}-${j}`;
+    // newDiv.style.animationDuration = '2s';
+    // newDiv.style.animationFillMode = 'forwards';
+    // newDiv.style.zIndex = 200;
+
     var board = document.querySelector('.board');
     // board.appendChild(newDiv);
     return checkWinner(map, gameSize[0], gameSize[1]);
