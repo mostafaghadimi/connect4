@@ -1,9 +1,11 @@
 
-var currentTurn = "red";
-var turnDiv = document.querySelector('.turn');
-var gameSize = init();
-var map = [[]];
-var availableCol = [];
+var currentTurn = "red",
+    turnDiv = document.querySelector('.turn'),
+    gameSize = init(),
+    map = [[]],
+    availableCol = [],
+    step = 1;
+
 timer();
 
 function init() {
@@ -47,8 +49,6 @@ function layoutBuilder(rows, cols, boardGame, arrows, arrowsSpace, rowsWidth, ro
         rowsWidth += `1fr `;
         availableCol.push(j);
     }
-    console.log(availableCol)
-
     arrows.style.gridRowGap = "5px";
     arrows.style.gridTemplateColumns = arrowsSpace;
     boardGame.style.gridRowGap = "5px";
@@ -58,38 +58,106 @@ function layoutBuilder(rows, cols, boardGame, arrows, arrowsSpace, rowsWidth, ro
     turnDiv.innerHTML = "نوبت قرمز"
 }
 
-function checkWinner(map, rows, cols){
-    // console.log(map);
-    // for (let i = rows - 1; i > -1 ; i--){
-    //     for (let j = 0; j < cols - 3; j++){
-    //         if (this.map[i][j] == this.map[i][j + 1] && this.map[i][j + 1] == this.map[i][j + 2] && this.map[i][j + 2] == this.map[i][j + 3]){
-    //             alert(`user ${currentTurn} win the game!`)
-    //         }
-    //     }
-    // }
-    // for (let i = cols - 1; i > -1; i--){
-    //     for (let j = 0; j < rows - 3; j++){
-    //         if (map[i + 1][j] == map [i][j] && map[i + 1][j] == map[i + 2][j] && map[i + 2][j] == map[i + 3][j]){
-    //             console.log(`user ${currentTurn} win the game!`)
-    //         }
-    //     }
-    // }
+function clearBoard () {
+    for(var i = 0; i < this.gameSize[0]; i++){
+        for(var j = 0; j < this.gameSize[1]; j++){
+            map[i][j] = 0;
+            document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = "";
+        }
+    }
+    for (let i = 0; i < gameSize[1]; i++){
+        availableCol[i] = i;
+    }
+
+}
+
+function checkWinner(){
+    var rows = this.gameSize[0];
+    var cols = this.gameSize[1];
+    var gameMap = this.map;
+    for (let i = rows - 1; i > -1 ; i--){
+        for (let j = 0; j < cols - 3; j++){
+            if (gameMap[i][j] != 0 && gameMap[i][j] == gameMap[i][j + 1] && gameMap[i][j + 1] == gameMap[i][j + 2] && gameMap[i][j + 2] == gameMap[i][j + 3]){
+                document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = '#ffc000'
+                document.querySelector(`.cell-${i}-${j + 1}`).style.backgroundColor = '#ffc000'
+                document.querySelector(`.cell-${i}-${j + 2}`).style.backgroundColor = '#ffc000'
+                document.querySelector(`.cell-${i}-${j + 3}`).style.backgroundColor = '#ffc000';
+                setTimeout(() => {
+                    alert(`user ${changeTurn(currentTurn)} win the game!`);
+                    clearBoard()
+                }, 1000)
+                break;
+            }
+        }
+    }
     
+    for (let i = rows - 4; i > -1; i--){
+        for (let j = 0; j < cols; j++){
+            if (gameMap[i][j] != 0 && gameMap[i + 1][j] == gameMap[i][j] && gameMap[i + 1][j] == gameMap[i + 2][j] && gameMap[i + 2][j] == gameMap[i + 3][j]){
+                document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i + 1}-${j}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i + 2}-${j}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i + 3}-${j}`).style.backgroundColor = '#ffc000';
+                setTimeout(() => {
+                    alert(`user ${changeTurn(currentTurn)} win the game!`);
+                    clearBoard();
+                }, 1000)
+                break;
+            }
+        }
+    }
+
+    for (let i = rows - 4; i > -1; i--) {
+        for (let j = cols - 4; j > -1; j--) {
+            if (gameMap[i][j] != 0 && gameMap[i][j]  == gameMap[i + 1][j + 1] && gameMap[i + 1][j + 1] == gameMap[i + 2][j + 2] && gameMap[i + 2][j + 2] == gameMap[i + 3][j + 3]){ 
+                document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i + 1}-${j + 1}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i + 2}-${j + 2}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i + 3}-${j + 3}`).style.backgroundColor = '#ffc000';
+                setTimeout(() => {
+                    alert(`user ${changeTurn(currentTurn)} win the game!`);
+                    clearBoard();
+                }, 1000)
+                break;
+            }   
+        }
+    }
+
+    for (let i = rows - 1; i > 2; i--) {
+        for (let j = cols - 4; j > -1; j--) {
+            if (gameMap[i][j] != 0 && gameMap[i][j]  == gameMap[i - 1][j + 1] && gameMap[i - 1][j + 1] == gameMap[i - 2][j + 2] && gameMap[i - 2][j + 2] == gameMap[i - 3][j + 3]){
+                document.querySelector(`.cell-${i}-${j}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i - 1}-${j + 1}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i - 2}-${j + 2}`).style.backgroundColor = '#ffc000';
+                document.querySelector(`.cell-${i - 3}-${j + 3}`).style.backgroundColor = '#ffc000';
+                setTimeout(() => {
+                    alert(`user ${changeTurn(currentTurn)} win the game!`);
+                    clearBoard();
+                }, 1000)
+                break;
+            }   
+        }
+    }
 }
 
 function selected(j) {
     return function () {
-        console.log(`You clicked on column ${j}`);
+        var flag = false;
         // bead in the map :) 
+        if (map[0][j] != 0) {
+            
+            return alert('این ستون پر شده است!'); 
+        }
         for (var i = gameSize[0] - 1; i > -1 ; i--){
             if (map[i][j] == 0){
-                console.log(currentTurn)
                 if (i == 0){
+                    flag = true;
                     availableCol.splice(availableCol.indexOf(j), 1);
                 }
                 if (currentTurn == "red"){
+
                     map[i][j] = 1;
-                    changeColor(i, j)
+                    changeColor(i, j);
                     break;
                 }
                 else {
@@ -99,8 +167,22 @@ function selected(j) {
                 }
             }
         }
-        console.log(availableCol)
-        // Check for the winner
+        
+        var isNotFinished = false;
+        for (let i = 0; i < gameSize[0]; i++){
+            for(let j = 0; j < gameSize[1]; j++){
+                if (map[i][j] == 0){
+                    isNotFinished = true
+                }
+            }
+        }
+        if (!isNotFinished) {
+            setTimeout(() => {
+                alert('بازی مساوی تمام شد!')
+                clearBoard()
+            }, 10)
+                return changeColor(i, j)  ;
+        }
         // change turn
         return changeTurn(currentTurn);
     }
@@ -140,33 +222,33 @@ function timer() {
     }, 1000)
 }
 
-
 function changeColor(i, j){
     var div = document.querySelector(`.cell-${i}-${j}`);
-    console.log(div);
+    var newDiv = document.createElement('div');
     div.style.backgroundColor = currentTurn;
     
     var style = document.querySelector('style');
     var keyframe = `\
         @keyframes animation-${i}-${j} {\
-            0% {\
-                top: 0%;\
-                left: calc((${j} * 100)/${gameSize[1]})%
-            }\
-            100% {\
-                top: calc((${i} * 100)/${gameSize[0]})%\
-                left: calc((${j} * 100)/${gameSize[1]})%\
+            from {\
+                transform: 'translateY(-50px)'\
+            },\
+            to {\
+                transform: 'translateY(50px)'\
             }\
         }\
     \
     `
     style.innerHTML += keyframe;
-    div.style.width =  div.offsetWidth +'px';
-    div.style.height = div.offsetHeight+'px';
+    // div.style.width =  div.offsetWidth +'px';
+    // div.style.height = div.offsetHeight+'px';
     div.style.animationName = `animation-${i}-${j}`;
     div.style.animationDuration = '2s';
-    div.style.position = 'absolute';
+    // div.style.position = 'absolute';
     div.style.animationFillMode = 'forwards';
+    div.style.zIndex = 200;
+    var board = document.querySelector('.board');
+    // board.appendChild(newDiv);
     return checkWinner(map, gameSize[0], gameSize[1]);
 }
 

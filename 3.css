@@ -7,13 +7,13 @@
 .container {
     width: 100vw;
     height: 100vh;
-    background-color: beige;
+    background-color: white;
 }
 
 .board {
     width: 50%;
     height: 80%;
-    background-color: brown;
+    background-color: #eeeeee;
     margin: auto;
     display: grid;
     grid-row-gap: 3px;
@@ -23,13 +23,15 @@
     display: grid;
     width: 50%;
     height: 30px;
-    margin: 0 auto;
+    margin: 0 auto -3px auto;
+
 }
 
 .arrow {
     width: auto;
     height: 80%;
     align-self: center;
+    background-color: #eeeeee;
     background-image: url(./downArrow.png);
     background-repeat: no-repeat;
     background-position: center;
@@ -40,12 +42,23 @@
     width: 100%;
     height: 100%;
     border-radius: 80%;
-    background-color: yellow;
+    background-color: #dfdfdf;
 }
 
 .info {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 50%;
+    background-color: #eeeeee;
     margin: auto;
+    padding-top: 5px;
+    
 }
+
+
+.timer, .turn {
+    margin: auto;
+    font-family: 'Calibri Light';
+    font-size: 20px;
+}
+
